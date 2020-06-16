@@ -1,40 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>
+            Blockchain and Deep Reinforcement Learning Empowered Intelligent 5G
+            Beyond
+          </h3>
+          <em>資科碩專一 108971005 黃俊鈞</em>
+        </section>
+        <section>
+          <h3>Agenda</h3>
+          <ul>
+            <li>研究簡介</li>
+            <li>實證案例介紹</li>
+            <li>整體架構綜覽</li>
+            <li>D2D caching 架構設計</li>
+            <li>區塊鏈運用機制</li>
+            <li>深度強化學習運用機制</li>
+            <li>其他區塊鏈應用場景</li>
+            <li>研究展望</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h3>研究簡介</h3>
+            <p>
+              本研究結合了區塊鏈與人工智慧雙方的優點，應用在無線網路通信架構當中。在作者看來，區塊鏈與人工智慧分別具備了以下的特性：
+            </p>
+          </section>
+          <section>
+            <h3>區塊鏈</h3>
+            <p>可建構安全、去中心化之資源共享環境</p>
+          </section>
+          <section>
+            <h3>人工智慧</h3>
+            <p>可解決高複雜度、不確定的、時間變異的問題</p>
+          </section>
+          <section>
+            <em>
+              本研究結合這兩項技術，提出一套資源快取機制架構的實證，以及相關的應用場景介紹
+            </em>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>實證案例介紹</h3>
+            <p>D2D caching 方案</p>
+          </section>
+          <section>
+            <h3>起因</h3>
+            <p>
+              隨著資訊量越來越大，對於 MBS
+              的儲存空間相對形成挑戰，因此作者提出了透過 D2D
+              的方式進行快取儲存機制。將資料快取在 mobile devices
+              上，也能有效地減少回溯(backhaul)流量
+            </p>
+          </section>
+          <section>
+            <h3>區塊鏈作用點</h3>
+            <p>
+              透過區塊鏈的交易安全機制，提供 devices
+              之間不需彼此信任也能夠進行資料交換與資源交易的基礎
+            </p>
+          </section>
+          <section>
+            <h3>人工智慧作用點</h3>
+            <p>
+              透過人工智慧的學習與調校，有效地預測 caching
+              的供需雙方連線，以優化資源分配策略、提升整體系統效益
+            </p>
+          </section>
+        </section>
+        <section>
+          <h3>整體架構綜覽</h3>
+          <img src="images/8726067-fig-1-source-large.gif" />
+        </section>
+        <section>
+          <h3>D2D caching 架構設計</h3>
+          <img src="images/8726067-fig-3-source-large.gif" />
+        </section>
+        <section>
+          <section>
+            <h3>區塊鏈運用機制</h3>
+            <p>
+              在 MBS 中建置區塊鏈節點，在 mobile device 上運行交易行為。當
+              caching provider 方提供裝置上的 caching 時，caching requester
+              便與之進行交易，並且這樣的交易行為會記錄在 MBS 的區塊中
+            </p>
+          </section>
+          <section>
+            <h3>系統初始化階段</h3>
+            <ol>
+              <li>
+                每一個 mobile device 都需要向 MBS 進行認證 <br />
+                (使用橢圓曲線數位簽章及非對稱式加密技術)
+              </li>
+              <li>取得認證成功後的 key pair 與 certification</li>
+            </ol>
+          </section>
+          <section>
+            <h3>選擇 D2D caching 角色</h3>
+            <ul>
+              <li>儲存較多資源的作為 provider</li>
+              <li>其他的作為 requester</li>
+            </ul>
+          </section>
+          <section>
+            <h3>進行交易</h3>
+            <ol>
+              <li>requester 將資源需求與時間發送給最近的 MBS</li>
+              <li>MBS 匯集 requests 後向 providers 發送廣播</li>
+              <li>providers 提供自己資源內容</li>
+              <li>MBS 透過 DRL 演算法計算最佳的配對與資源分配模式</li>
+              <li>建立配對後成立交易</li>
+            </ol>
+          </section>
+          <section>
+            <h3>打包建立區塊</h3>
+            <ol>
+              <li>MBS 匯集交易記錄，將之加密簽章，以確保精確性</li>
+              <li>MBS 將交易記錄廣播出去</li>
+              <li>
+                MBS 群體透過 PBFT 共識演算法，選出 leader 負責驗證交易、打包區塊
+              </li>
+            </ol>
+          </section>
+          <section>
+            <h3>完成共識協議</h3>
+            <ol>
+              <li>當 leader 發佈打包的區塊後</li>
+              <li>其他的 MBS 一同驗證這個區塊，並且發佈驗證結果</li>
+              <li>leader 會確認結果，以及決定是否需要再次驗證</li>
+              <li>沒問題後，所有的 MBS 會保存區塊以確保可溯性</li>
+            </ol>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>DRL 運用機制</h3>
+            <p>
+              透過 DRL
+              學習、選擇最適的供需雙方配對，以及最佳的網路資源配置模式，以最大化系統效益。在此
+              DRL 演算法中，具有以下三項關鍵元素：
+            </p>
+          </section>
+          <section>
+            <h3>狀態(State)</h3>
+            <p>狀態反映了系統每一個當下的資源情形，包含以下三種資源：</p>
+            <ol>
+              <li>需求方的內容</li>
+              <li>供給方的資源</li>
+              <li>供給方的網路頻寬</li>
+            </ol>
+          </section>
+          <section>
+            <h3>行動(Action)</h3>
+            <p>行動代表每一次的供需雙方配對的執行，具有以下兩項內容：</p>
+            <ol>
+              <li>caching 內容配對與否</li>
+              <li>雙方頻寬</li>
+            </ol>
+          </section>
+          <section>
+            <h3>獎勵(Reward)</h3>
+            <p>
+              基於狀態與行動的結果，每次的計算與配對均會獲得獎勵，而在這個案例中，系統效益的評估值即為獎勵值
+            </p>
+          </section>
+          <section>
+            <h3>類神經網路結構</h3>
+            <p>
+              本研究所使用的演算法，是 deep deterministic policy gradient method
+              的方式，其 primary network 與 target network
+              皆具有兩個不同作用的類神經網路：
+            </p>
+            <ul>
+              <li>Actor Network：用以發現 policy</li>
+              <li>
+                Critic Network：用以決定 Actor 的表現情況以及估算價值，以輔助
+                Actor 找出最適的 policy
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>DRL 執行效果</h3>
+            <img src="images/8726067-fig-4-source-large.gif"/>
+          </section>
+          <section>
+            <h3>加入 learning rate 的結果</h3>
+            <img src="images/8726067-fig-5-source-large.gif"/>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>其他應用場景</h3>
+            <img src='images/8726067-fig-2-source-large.gif'/>
+          </section>
+          <section>
+            <h3>頻譜共享</h3>
+            <ol>
+              <li>透過</li>
+              <li></li>
+            </ol>
+          </section>
+          <section>
+            <h3>能源交易</h3>
+          </section>
+          <section>
+            <h3>運算卸載</h3>
+          </section>
+        </section>
+        <section>
+          <h3>研究展望</h3>
+          <p></p>
+        </section>
+      </div>
+    </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
